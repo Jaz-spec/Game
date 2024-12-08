@@ -19,6 +19,7 @@ class Circle {
 	drawCircle(context) {
 		//draws the circles
 		context.beginPath();
+		context.fillStyle = "black";
 		context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
 		context.fill();
 		context.closePath();
@@ -45,6 +46,23 @@ class Circle {
 	}
 }
 
+class Player {
+	constructor(x, y, radius) {
+		this.x = x;
+		this.y = y;
+		this.radius = radius;
+	}
+
+	drawPlayer() {
+		context.beginPath();
+		context.fillStyle = "red";
+		context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+		context.fill();
+		context.closePath();
+	}
+}
+
+let player = new Player(350, 350, 25);
 //circle values
 let radius = 25;
 let max = canvas.width - radius;
@@ -61,12 +79,14 @@ for (var num = 0; num < 10; num++) {
 
 //animates the circles using the update function
 function animate() {
-	requestAnimationFrame(animate);
 	context.clearRect(0, 0, canvas.width, canvas.height);
+	player.drawPlayer();
 	allCircles.forEach((element) => {
 		element.update();
 	});
+	requestAnimationFrame(animate);
 }
 animate();
 
+console.log(player);
 console.log(allCircles);
