@@ -4,10 +4,6 @@ const context = canvas.getContext("2d");
 //canvas size
 const canvasWidth = (canvas.width = 700);
 const canvasHeight = (canvas.height = 700);
-//circle values
-let radius = 25;
-let max = canvas.width - radius;
-let allCircles = [];
 
 class Circle {
 	constructor(x, y, radius, speed) {
@@ -30,7 +26,6 @@ class Circle {
 
 	update() {
 		//updates position of object
-		context.clearRect(0, 0, canvas.width, canvas.height);
 		this.drawCircle(context);
 		this.x += this.dx;
 		this.y += this.dy;
@@ -50,11 +45,28 @@ class Circle {
 	}
 }
 
-let newCircle = new Circle(100, 25, radius, 5);
-newCircle.drawCircle(context);
+//circle values
+let radius = 25;
+let max = canvas.width - radius;
+let allCircles = [];
 
+//genrates a random set of circles
+for (var num = 0; num < 10; num++) {
+	let speed = Math.random() * 7;
+	let xpos = Math.random() * (max - radius + 1) + radius;
+	let ypos = Math.random() * (max - radius + 1) + radius;
+	let newCircle = new Circle(xpos, ypos, radius, speed);
+	allCircles.push(newCircle);
+}
+
+//animates the circles using the update function
 function animate() {
 	requestAnimationFrame(animate);
-	newCircle.update();
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	allCircles.forEach((element) => {
+		element.update();
+	});
 }
 animate();
+
+console.log(allCircles);
