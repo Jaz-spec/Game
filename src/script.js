@@ -5,12 +5,17 @@ const context = canvas.getContext("2d");
 const canvasWidth = (canvas.width = 700);
 const canvasHeight = (canvas.height = 700);
 
+let radius = 50;
+let max = canvas.width - radius;
+let allCircles = [];
+
 class Circle {
-	constructor(x, y, radius, speed) {
-		this.x = x;
-		this.y = y;
+	constructor() {
+		this.x = Math.random() * (max - radius + 1) + radius;
+		this.y = Math.random() * (max - radius + 1) + radius;
 		this.radius = radius;
-		this.speed = speed;
+		this.speed = Math.random() * 6;
+		this.color = "black";
 
 		this.dx = 1 * this.speed;
 		this.dy = 1 * this.speed;
@@ -19,17 +24,17 @@ class Circle {
 	drawCircle(context) {
 		//draws the circles
 		context.beginPath();
-		context.fillStyle = "black";
+		context.fillStyle = this.color;
 		context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
 		context.fill();
 		context.closePath();
 	}
 
 	update() {
-		//updates position of object
 		this.drawCircle(context);
 		this.x += this.dx;
 		this.y += this.dy;
+
 		//keeps object within the canvas
 		if (this.x > canvas.width - radius) {
 			this.dx = -this.dx;
@@ -43,50 +48,49 @@ class Circle {
 		if (this.y < radius) {
 			this.dy = -this.dy;
 		}
+
+		this.a = this.x - player.x;
+		this.b = this.y - player.y;
+		this.distance = Math.sqrt(this.a * this.a + this.b * this.b);
 	}
 }
 
 class Player {
-	constructor(x, y, radius) {
+	constructor(x, y, radius, color) {
 		this.x = x;
 		this.y = y;
 		this.radius = radius;
+		this.color = color;
 	}
 
 	drawPlayer() {
 		context.beginPath();
-		context.fillStyle = "red";
+		context.fillStyle = this.color;
 		context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
 		context.fill();
 		context.closePath();
 	}
 }
 
-let player = new Player(350, 350, 25);
-//circle values
-let radius = 25;
-let max = canvas.width - radius;
-let allCircles = [];
+let player = new Player(350, 350, radius, "red");
 
-//genrates a random set of circles
-for (var num = 0; num < 10; num++) {
-	let speed = Math.random() * 7;
-	let xpos = Math.random() * (max - radius + 1) + radius;
-	let ypos = Math.random() * (max - radius + 1) + radius;
-	let newCircle = new Circle(xpos, ypos, radius, speed);
+for (i = 0; allCircles.length < 10; i++) {
+	let newCircle = new Circle();
 	allCircles.push(newCircle);
 }
 
 //animates the circles using the update function
 function animate() {
+	requestAnimationFrame(animate);
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	player.drawPlayer();
-	allCircles.forEach((element) => {
-		element.update();
-	});
-	requestAnimationFrame(animate);
-}
-animate();
 
-console.log(player);
-console.log(allCircles);
+	for (let circle of allCircles) {
+		circle.update();
+		if (circle.distance < circle.radius + player.radius) {
+			circle.color = "blue";
+		} else circle.color = "black";
+	}
+}
+
+animate();
