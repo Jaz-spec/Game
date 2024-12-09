@@ -1,12 +1,11 @@
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 let radius = 25;
-let max = canvas.width - radius;
 
 export default class Circle {
 	constructor(radius) {
-		this.x = Math.random() * (max - radius + 1) + radius;
-		this.y = Math.random() * (max - radius + 1) + radius;
+		this.x = Math.random() * (675 - radius) + radius;
+		this.y = Math.random() * (675 - radius) + radius;
 		this.radius = radius;
 		this.speed = Math.random() * 6;
 		this.color = "black";
