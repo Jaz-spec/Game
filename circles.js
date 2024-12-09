@@ -3,11 +3,11 @@ const context = canvas.getContext("2d");
 let radius = 25;
 
 export default class Circle {
-	constructor(radius) {
+	constructor(radius, speed) {
 		this.x = Math.random() * (675 - radius) + radius;
 		this.y = Math.random() * (675 - radius) + radius;
 		this.radius = radius;
-		this.speed = Math.random() * 6;
+		this.speed = speed;
 		this.color = "black";
 		this.dx = 1 * this.speed;
 		this.dy = 1 * this.speed;

@@ -5,15 +5,12 @@ const canvasWidth = (canvas.width = 700);
 const canvasHeight = (canvas.height = 700);
 
 export default class Player {
-	constructor(x, y, radius, color) {
+	constructor(x, y, radius, color, gameFrame) {
 		this.x = x;
 		this.y = y;
 		this.radius = radius;
 		this.color = color;
-		this.speed = 7;
-
-		this.dx = 1 * this.speed;
-		this.dy = 1 * this.speed;
+		this.gameFrame = gameFrame;
 	}
 
 	drawPlayer() {
@@ -24,8 +21,12 @@ export default class Player {
 		context.closePath();
 	}
 
-	update(player, userInput) {
+	update(player, userInput, speed) {
 		player.drawPlayer();
+		this.speed = speed;
+		this.dx = 1 * this.speed;
+		this.dy = 1 * this.speed;
+
 		if (userInput.up) {
 			this.y -= this.dy;
 		}
