@@ -15,6 +15,7 @@ let count = 0;
 let radius = 25;
 let circleSpeed = 1;
 let playerSpeed = 2;
+let gameOver = false;
 
 let allCircles = [];
 let gifts = [];
@@ -28,7 +29,9 @@ let userInput = new Input(up, down, left, right);
 let player = new Player(350, 350, radius, "red", gameFrame);
 
 function animate() {
-	requestAnimationFrame(animate);
+	if (!gameOver) {
+		requestAnimationFrame(animate);
+	}
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	gameFrame++;
 	player.update(player, userInput, playerSpeed);
@@ -52,7 +55,7 @@ function animate() {
 		circle.update(player);
 
 		if (circle.distance < circle.radius + player.radius) {
-			circle.color = "blue";
+			gameOver = true;
 		} else circle.color = "black";
 	}
 
