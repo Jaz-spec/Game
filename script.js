@@ -12,7 +12,8 @@ const canvasHeight = (canvas.height = 700);
 //game variables
 let gameFrame = 0;
 let count = 0;
-let radius = 25;
+let playerRadius = 35;
+let enemyRadius = 25;
 let circleSpeed = 1;
 let playerSpeed = 2;
 let gameOver = false;
@@ -26,13 +27,17 @@ let left = false;
 let right = false;
 
 let userInput = new Input(up, down, left, right);
-let player = new Player(350, 350, radius, "red", gameFrame);
+let player = new Player(350, 350, playerRadius, "red", gameFrame);
+
+const backgroundImage = new Image();
+backgroundImage.src = "Background.png";
 
 function animate() {
 	if (!gameOver) {
 		requestAnimationFrame(animate);
 	}
 	context.clearRect(0, 0, canvas.width, canvas.height);
+	context.drawImage(backgroundImage, 0, 0);
 	gameFrame++;
 	player.update(player, userInput, playerSpeed);
 
@@ -40,13 +45,13 @@ function animate() {
 	context.fillText(`Score: ${count}`, 10, 30);
 
 	if (allCircles.length === 0) {
-		let firstCircle = new Circle(radius, circleSpeed);
+		let firstCircle = new Circle(enemyRadius, circleSpeed);
 		allCircles.push(firstCircle);
 		firstCircle.update(player);
 	}
 
 	if (gameFrame % 700 === 0 && allCircles.length < 10) {
-		let newCircle = new Circle(radius, circleSpeed);
+		let newCircle = new Circle(enemyRadius, circleSpeed);
 		allCircles.push(newCircle);
 		circleSpeed += 0.5;
 		playerSpeed += 0.5;

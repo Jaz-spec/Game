@@ -2,6 +2,9 @@ const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 let radius = 25;
 
+const enemyImage = new Image();
+enemyImage.src = "sprite3.png";
+
 export default class Circle {
 	constructor(radius, speed) {
 		this.x = Math.random() * (675 - radius) + radius;
@@ -15,11 +18,14 @@ export default class Circle {
 
 	drawCircle(context) {
 		//draws the circles
-		context.beginPath();
-		context.fillStyle = this.color;
-		context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-		context.fill();
-		context.closePath();
+
+		context.drawImage(
+			enemyImage,
+			this.x - this.radius,
+			this.y - this.radius,
+			175,
+			225
+		);
 	}
 
 	update(player) {

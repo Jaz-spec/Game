@@ -1,3 +1,6 @@
+const giftImage = new Image();
+giftImage.src = "sprite1.png";
+
 export default class Gift {
 	constructor(radius) {
 		this.x = Math.random() * (675 - radius) + radius;
@@ -7,11 +10,13 @@ export default class Gift {
 	}
 
 	draw(context) {
-		context.beginPath();
-		context.fillStyle = this.color;
-		context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-		context.fill();
-		context.closePath();
+		context.drawImage(
+			giftImage,
+			this.x - this.radius,
+			this.y - this.radius,
+			145,
+			185
+		);
 	}
 
 	update(context, player) {

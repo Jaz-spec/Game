@@ -4,6 +4,9 @@ const context = canvas.getContext("2d");
 const canvasWidth = (canvas.width = 700);
 const canvasHeight = (canvas.height = 700);
 
+const playerImage = new Image();
+playerImage.src = "sprite2.png";
+
 export default class Player {
 	constructor(x, y, radius, color, gameFrame) {
 		this.x = x;
@@ -14,11 +17,13 @@ export default class Player {
 	}
 
 	drawPlayer() {
-		context.beginPath();
-		context.fillStyle = this.color;
-		context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-		context.fill();
-		context.closePath();
+		context.drawImage(
+			playerImage,
+			this.x - this.radius - 3,
+			this.y - this.radius + 3,
+			250,
+			300
+		);
 	}
 
 	update(player, userInput, speed) {
