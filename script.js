@@ -20,6 +20,10 @@ let playerSpeed = 2;
 let gameOver = false;
 let start = false;
 
+let newCircle = {};
+let spawnFunctionCalled = false;
+let spawnFrames = 0;
+
 let allCircles = [];
 let gifts = [];
 //input variable
@@ -86,20 +90,43 @@ function animate() {
 			firstCircle.update(player);
 		}
 
-		if (gameFrame % 700 === 0 && allCircles.length < 10) {
-			let newCircle = new Circle(enemyRadius, circleSpeed);
-			allCircles.push(newCircle);
+		if (gameFrame % 1000 === 0 && allCircles.length < 10) {
+			newCircle = new Circle(enemyRadius, circleSpeed);
+			spawnCircle();
+			spawnFrames = 250;
+			spawnFunctionCalled = true;
+			setTimeout(() => {
+				allCircles.push(newCircle);
+			}, 3000);
 			circleSpeed += 0.5;
 			playerSpeed += 0.5;
 		}
+		if (gameFrame % 500 === 0) {
+			playerSpeed += 0.2;
+		}
+
+		//ensures spawn function is only called for 250 frames
+		if (spawnFunctionCalled) {
+			if (spawnFrames > 0) {
+				spawnCircle();
+				spawnFrames--;
+			} else {
+				spawnFunctionCalled = false;
+			}
+		}
+		function spawnCircle() {
+			newCircle.spawnCircle(context, gameFrame);
+		}
+
 		for (let circle of allCircles) {
 			circle.update(player);
 
 			if (circle.distance < circle.radius + player.radius) {
 				gameOver = true;
-			} else circle.color = "black";
+			}
 		}
 
+		//GIFTS
 		if (gameFrame % 50 === 0 && gifts.length < 1) {
 			let gift = new Gift(20);
 			gifts.push(gift);

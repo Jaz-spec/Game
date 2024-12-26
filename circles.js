@@ -17,8 +17,6 @@ export default class Circle {
 	}
 
 	drawCircle(context) {
-		//draws the circles
-
 		context.drawImage(
 			enemyImage,
 			this.x - this.radius,
@@ -26,6 +24,19 @@ export default class Circle {
 			175,
 			225
 		);
+	}
+
+	spawnCircle(context, gameFrame) {
+		this.frame = Math.floor((gameFrame % 100) / 10);
+		if (
+			this.frame === 3 ||
+			this.frame === 4 ||
+			this.frame === 5 ||
+			this.frame === 8 ||
+			this.frame === 9
+		) {
+			this.drawCircle(context);
+		}
 	}
 
 	update(player) {
