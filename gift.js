@@ -1,5 +1,5 @@
 const giftImage = new Image();
-giftImage.src = "sprite1.png";
+giftImage.src = "images/sprite1.png";
 
 export default class Gift {
 	constructor(radius) {

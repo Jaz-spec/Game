@@ -36,7 +36,7 @@ let userInput = new Input(up, down, left, right);
 let player = new Player(350, 350, playerRadius, "red", gameFrame);
 
 const backgroundImage = new Image();
-backgroundImage.src = "/src/Background.png";
+backgroundImage.src = "images/Background.png";
 
 window.addEventListener("keydown", (event) => {
 	if (event.key === "k") {

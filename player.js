@@ -5,7 +5,7 @@ const canvasWidth = (canvas.width = 700);
 const canvasHeight = (canvas.height = 700);
 
 const playerImage = new Image();
-playerImage.src = "sprite2.png";
+playerImage.src = "images/sprite2.png";
 
 export default class Player {
 	constructor(x, y, radius, color, gameFrame) {

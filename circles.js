@@ -3,7 +3,7 @@ const context = canvas.getContext("2d");
 let radius = 25;
 
 const enemyImage = new Image();
-enemyImage.src = "sprite3.png";
+enemyImage.src = "images/sprite3.png";
 
 export default class Circle {
 	constructor(radius, speed) {
