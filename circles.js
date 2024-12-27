@@ -12,8 +12,8 @@ export default class Circle {
 		this.radius = radius;
 		this.speed = speed;
 		this.color = "black";
-		this.dx = 1 * this.speed;
-		this.dy = 1 * this.speed;
+		this.dx = Math.random() < 0.5 ? 1 : -1 * this.speed;
+		this.dy = Math.random() < 0.5 ? 1 : -1 * this.speed;
 	}
 
 	drawCircle(context) {
