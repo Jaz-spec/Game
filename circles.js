@@ -6,9 +6,9 @@ const enemyImage = new Image();
 enemyImage.src = "images/sprite3.png";
 
 export default class Circle {
-	constructor(radius, speed) {
-		this.x = Math.random() * (675 - radius) + radius;
-		this.y = Math.random() * (675 - radius) + radius;
+	constructor(radius, speed, x, y) {
+		this.x = x;
+		this.y = y;
 		this.radius = radius;
 		this.speed = speed;
 		this.color = "black";

@@ -10,34 +10,43 @@ const context = canvas.getContext("2d");
 //canvas size
 const canvasWidth = (canvas.width = 700);
 const canvasHeight = (canvas.height = 700);
+
 //game variables
 let gameFrame = 0;
 let count = 0;
+
 let playerRadius = 35;
 let enemyRadius = 25;
+
 let circleSpeed = 1;
 let playerSpeed = 2;
+
 let gameOver = false;
 let start = false;
 
-let newCircle = {};
+let randomNum = Math.random() * (675 - enemyRadius) + enemyRadius;
+
 let spawnFunctionCalled = false;
 let spawnFrames = 0;
 
+let newCircle = {};
 let allCircles = [];
 let gifts = [];
+
 //input variable
 let up = false;
 let down = false;
 let left = false;
 let right = false;
 
+//creating player
 let userInput = new Input(up, down, left, right);
 let player = new Player(350, 350, playerRadius, "red", gameFrame);
-
+//creating background
 const backgroundImage = new Image();
 backgroundImage.src = "images/Background.png";
 
+//event listener to start game
 window.addEventListener("keydown", (event) => {
 	if (event.key === "k") {
 		start = true;
@@ -90,14 +99,16 @@ function animate() {
 
 		player.update(player, userInput, playerSpeed);
 
+		//creates first enemy
 		if (allCircles.length === 0) {
-			let firstCircle = new Circle(enemyRadius, circleSpeed);
+			let firstCircle = new Circle(enemyRadius, circleSpeed, 350, 175);
 			allCircles.push(firstCircle);
 			firstCircle.update(player);
 		}
 
+		//creates additional enemies
 		if (gameFrame % 1000 === 0 && allCircles.length < 10) {
-			newCircle = new Circle(enemyRadius, circleSpeed);
+			newCircle = new Circle(enemyRadius, circleSpeed, randomNum, randomNum);
 			spawnCircle();
 			spawnFrames = 250;
 			spawnFunctionCalled = true;
