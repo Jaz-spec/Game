@@ -52,7 +52,7 @@ function endScreen() {
 	context.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
 	context.font = "20px Arial";
 	context.fillText(
-		"Press CTRL + r to play again",
+		"Press Ctrl + [R] to play again",
 		canvas.width / 2,
 		canvas.height / 2 + 20
 	);
@@ -78,6 +78,12 @@ function animate() {
 			"Press [k] to start",
 			canvas.width / 2,
 			canvas.height / 2 + 20
+		);
+		context.font = "20px Arial";
+		context.fillText(
+			"Use the arrow keys to avoid the aliens and collect the gems",
+			canvas.width / 2,
+			canvas.height / 2 + 50
 		);
 	} else {
 		gameFrame++;

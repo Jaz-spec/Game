@@ -1,3 +1,10 @@
+h1 {
+	color: white;
+	text-align: center;
+	font-size: 3.5rem;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
 .canvas {
 	border: solid 4px rgb(49, 10, 49);
 	height: 700px;
