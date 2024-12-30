@@ -78,9 +78,6 @@ function animate() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	context.drawImage(backgroundImage, 0, 0);
 
-	let randomX = Math.random() * (675 - enemyRadius) + enemyRadius;
-	let randomY = Math.random() * (675 - enemyRadius) + enemyRadius;
-
 	if (!start) {
 		context.textAlign = "center";
 		context.font = "30px Arial";
@@ -109,6 +106,8 @@ function animate() {
 
 		//creates additional enemies
 		if (gameFrame % 1000 === 0 && allCircles.length < 10) {
+			let randomX = Math.random() * (675 - enemyRadius) + enemyRadius;
+			let randomY = Math.random() * (675 - enemyRadius) + enemyRadius;
 			newCircle = new Circle(enemyRadius, circleSpeed, randomX, randomY);
 			spawnCircle();
 			spawnFrames = 250;
